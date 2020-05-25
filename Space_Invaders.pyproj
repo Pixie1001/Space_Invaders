@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{66419b10-eead-4b7c-8719-e04a90cca472}</ProjectGuid>
+    <ProjectHome />
+    <StartupFile>
+    </StartupFile>
+    <SearchPath />
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{888888a0-9f3d-457c-b088-3a5042f75d52}</ProjectTypeGuids>
+    <LaunchProvider>Standard Python launcher</LaunchProvider>
+    <InterpreterId />
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <PropertyGroup>
+    <VisualStudioVersion Condition=" '$(VisualStudioVersion)' == '' ">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="images\background.jpg" />
+    <Content Include="images\enemy1_1.png" />
+    <Content Include="images\enemy1_2.png" />
+    <Content Include="images\enemy2_1.png" />
+    <Content Include="images\enemy2_2.png" />
+    <Content Include="images\enemy3_1.png" />
+    <Content Include="images\enemy3_2.png" />
+    <Content Include="images\enemylaser.png" />
+    <Content Include="images\explosionblue.png" />
+    <Content Include="images\explosiongreen.png" />
+    <Content Include="images\explosionpurple.png" />
+    <Content Include="images\laser.png" />
+    <Content Include="images\mystery.png" />
+    <Content Include="images\ship.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images" />
+    <Folder Include="src\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\Blocker.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\EnemiesGroup.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Enemy.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\EnemyExplosion.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Life.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Main.py" />
+    <Compile Include="src\Mystery.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\MysteryExplosion.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Ship.py" />
+    <Compile Include="src\ShipExplosion.py">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\Text.py">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
+</Project>
