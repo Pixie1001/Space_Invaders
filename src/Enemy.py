@@ -1,5 +1,23 @@
+from pygame import *
+import sys
+from os.path import abspath, dirname, join
+from random import choice
 
-class Enemy(sprite.Sprite):
+sys.path.append(dirname(dirname(__file__)) + '/src/')
+
+from Blocker import *
+from Bullet import *
+from EnemiesGroup import *
+from EnemyExplosion import *
+import Main
+from Life import *
+from Mystery import *
+from MysteryExplosion import *
+from Ship import *
+from ShipExplosion import *
+from Text import *
+
+class Enemy( sprite.Sprite):
     def __init__(self, row, column):
         sprite.Sprite.__init__(self)
         self.row = row
@@ -17,7 +35,7 @@ class Enemy(sprite.Sprite):
         self.image = self.images[self.index]
 
     def update(self, *args):
-        game.screen.blit(self.image, self.rect)
+        Main.SCREEN.blit(self.image, self.rect)
 
     def load_images(self):
         images = {0: ['1_2', '1_1'],
@@ -26,7 +44,7 @@ class Enemy(sprite.Sprite):
                   3: ['3_1', '3_2'],
                   4: ['3_1', '3_2'],
                   }
-        img1, img2 = (IMAGES['enemy{}'.format(img_num)] for img_num in
+        img1, img2 = (Main.IMAGES['enemy{}'.format(img_num)] for img_num in
                       images[self.row])
-        self.images.append(transform.scale(img1, (40, 35)))
-        self.images.append(transform.scale(img2, (40, 35)))
+        self.images.append( transform.scale(img1, (40, 35)))
+        self.images.append( transform.scale(img2, (40, 35)))

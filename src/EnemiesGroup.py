@@ -1,6 +1,25 @@
+from pygame import *
+import sys
+from os.path import abspath, dirname, join
+from random import choice
 
-class EnemiesGroup(sprite.Group):
+sys.path.append(dirname(dirname(__file__)) + '/src/')
+
+from Blocker import *
+from Bullet import *
+from Enemy import *
+from EnemiesGroup import *
+from EnemyExplosion import *
+import Main
+from Mystery import *
+from MysteryExplosion import *
+from Ship import *
+from ShipExplosion import *
+from Text import *
+
+class EnemiesGroup( sprite.Group):
     def __init__(self, columns, rows):
+        game = Main.SpaceInvaders()
         sprite.Group.__init__(self)
         self.enemies = [[None] * columns for _ in range(rows)]
         self.columns = columns
@@ -19,6 +38,7 @@ class EnemiesGroup(sprite.Group):
         self._rightAliveColumn = columns - 1
 
     def update(self, current_time):
+        print("EnemiesGroup")
         if current_time - self.timer > self.moveTime:
             if self.direction == 1:
                 max_move = self.rightMoves + self.rightAddMove
@@ -32,7 +52,7 @@ class EnemiesGroup(sprite.Group):
                 self.moveNumber = 0
                 self.bottom = 0
                 for enemy in self:
-                    enemy.rect.y += ENEMY_MOVE_DOWN
+                    enemy.rect.y += Main.ENEMY_MOVE_DOWN
                     enemy.toggle_image()
                     if self.bottom < enemy.rect.y + 35:
                         self.bottom = enemy.rect.y + 35
