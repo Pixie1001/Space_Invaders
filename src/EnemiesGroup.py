@@ -52,6 +52,7 @@ class EnemiesGroup( sprite.Group):
                 self.bottom = 0
                 for enemy in self:
                     enemy.rect.y += Main.ENEMY_MOVE_DOWN
+                    enemy.hatRect.y += Main.ENEMY_MOVE_DOWN
                     enemy.toggle_image()
                     if self.bottom < enemy.rect.y + 35:
                         self.bottom = enemy.rect.y + 35
@@ -59,6 +60,7 @@ class EnemiesGroup( sprite.Group):
                 velocity = 10 if self.direction == 1 else -10
                 for enemy in self:
                     enemy.rect.x += velocity
+                    enemy.hatRect.x += velocity
                     enemy.toggle_image()
                 self.moveNumber += 1
 

@@ -1,7 +1,7 @@
 from pygame import *
 import sys
 from os.path import abspath, dirname, join
-from random import choice
+from random import choice, randint
 
 sys.path.append(dirname(dirname(__file__)) + '/src/')
 
@@ -23,10 +23,15 @@ class Enemy( sprite.Sprite):
         self.row = row
         self.column = column
         self.images = []
+        self.hats = []
         self.load_images()
         self.index = 0
+        self.hatNum = randint(0, 2)
         self.image = self.images[self.index]
+        self.hat = self.hats[self.hatNum]
         self.rect = self.image.get_rect()
+        self.hatRect = self.hat.get_rect()
+        print('enemy init')
 
     def toggle_image(self):
         self.index += 1
@@ -34,8 +39,9 @@ class Enemy( sprite.Sprite):
             self.index = 0
         self.image = self.images[self.index]
 
-    def update(self, *args):
+    def update(self, *args): 
         Main.SCREEN.blit(self.image, self.rect)
+        Main.SCREEN.blit(self.hat, self.hatRect)
 
     def load_images(self):
         images = {0: ['1_2', '1_1'],
@@ -48,3 +54,11 @@ class Enemy( sprite.Sprite):
                       images[self.row])
         self.images.append( transform.scale(img1, (40, 35)))
         self.images.append( transform.scale(img2, (40, 35)))
+        self.hats.append(transform.scale(Main.IMAGES['hat1'], (45, 35)))
+        self.hats.append(transform.scale(Main.IMAGES['hat2'], (45, 35)))
+        self.hats.append(transform.scale(Main.IMAGES['hat3'], (45, 35)))
+
+#        if len(self.hats) == 0:
+            #print('Hat count: 0')
+#        elif len(self.hats) >= 1:
+            #print('Hat count: 1')

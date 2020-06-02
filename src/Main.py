@@ -43,6 +43,7 @@ IMG_NAMES = ['ship', 'mystery',
              'enemy1_1', 'enemy1_2',
              'enemy2_1', 'enemy2_2',
              'enemy3_1', 'enemy3_2',
+             'hat1', 'hat2', 'hat3',
              'explosionblue', 'explosiongreen', 'explosionpurple',
              'laser', 'enemylaser']
 IMAGES = {name:  image.load(IMAGE_PATH + '{}.png'.format(name)).convert_alpha()
@@ -180,6 +181,8 @@ class SpaceInvaders(object):
                 enemy = Enemy.Enemy(row, column)
                 enemy.rect.x = 157 + (column * 50)
                 enemy.rect.y = self.enemyPosition + (row * 45)
+                enemy.hatRect.x = enemy.rect.x
+                enemy.hatRect.y = enemy.rect.y - 18
                 enemies.add(enemy)
 
         self.enemies = enemies
