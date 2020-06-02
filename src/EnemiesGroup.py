@@ -38,7 +38,6 @@ class EnemiesGroup( sprite.Group):
         self._rightAliveColumn = columns - 1
 
     def update(self, current_time):
-        print("EnemiesGroup")
         if current_time - self.timer > self.moveTime:
             if self.direction == 1:
                 max_move = self.rightMoves + self.rightAddMove

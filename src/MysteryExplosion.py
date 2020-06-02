@@ -27,6 +27,6 @@ class MysteryExplosion( sprite.Sprite):
     def update(self, current_time, *args):
         passed = current_time - self.timer
         if passed <= 200 or 400 < passed <= 600:
-            self.text.draw(GAME.screen)
+            self.text.draw(Main.SCREEN)
         elif 600 < passed:
             self.kill()

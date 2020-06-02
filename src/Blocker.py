@@ -31,4 +31,3 @@ class Blocker( sprite.Sprite):
 
     def update(self, keys, *args):
         Main.SCREEN.blit(self.image, self.rect)
-        print("Blocker")

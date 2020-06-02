@@ -27,7 +27,6 @@ class Bullet( sprite.Sprite):
         self.filename = filename
 
     def update(self, keys, *args):
-        print("Bullet")
         Main.SCREEN.blit(self.image, self.rect)
         self.rect.y += self.speed * self.direction
         if self.rect.y < 15 or self.rect.y > 600:

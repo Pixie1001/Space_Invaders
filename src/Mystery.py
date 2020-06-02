@@ -27,7 +27,7 @@ class Mystery( sprite.Sprite):
         self.moveTime = 25000
         self.direction = 1
         self.timer = time.get_ticks()
-        self.mysteryEntered =  mixer.Sound(Main.SOUND_PATH + 'mysteryentered.wav')
+        self.mysteryEntered = mixer.Sound(Main.SOUND_PATH + 'mysteryentered.wav')
         self.mysteryEntered.set_volume(0.3)
         self.playSound = True
 
