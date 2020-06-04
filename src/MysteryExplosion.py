@@ -17,6 +17,7 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
+#Handles UFO enemy type's explosion animation
 class MysteryExplosion( sprite.Sprite):
     def __init__(self, mystery, score, *groups):
         super(MysteryExplosion, self).__init__(*groups)

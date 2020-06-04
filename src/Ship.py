@@ -16,6 +16,7 @@ from MysteryExplosion import *
 from ShipExplosion import *
 from Text import *
 
+#Handles player's ship avatar
 class Ship( sprite.Sprite):
     def __init__(self):
         sprite.Sprite.__init__(self)

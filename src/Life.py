@@ -17,6 +17,7 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
+#Handles the player's life bar
 class Life(sprite.Sprite):
     def __init__(self, xpos, ypos):
         sprite.Sprite.__init__(self)

@@ -17,6 +17,7 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
+#Handles text displays
 class Text(object):
     def __init__(self, textFont, size, message, color, xpos, ypos):
         self.font =  font.Font(textFont, size)

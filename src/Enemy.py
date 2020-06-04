@@ -17,7 +17,8 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
-class Enemy( sprite.Sprite):
+#Characteristics of non-mystery type enemies
+class Enemy(sprite.Sprite):
     def __init__(self, row, column):
         sprite.Sprite.__init__(self)
         self.row = row
@@ -31,7 +32,6 @@ class Enemy( sprite.Sprite):
         self.hat = self.hats[self.hatNum]
         self.rect = self.image.get_rect()
         self.hatRect = self.hat.get_rect()
-        print('enemy init')
 
     def toggle_image(self):
         self.index += 1
@@ -57,8 +57,3 @@ class Enemy( sprite.Sprite):
         self.hats.append(transform.scale(Main.IMAGES['hat1'], (45, 35)))
         self.hats.append(transform.scale(Main.IMAGES['hat2'], (45, 35)))
         self.hats.append(transform.scale(Main.IMAGES['hat3'], (45, 35)))
-
-#        if len(self.hats) == 0:
-            #print('Hat count: 0')
-#        elif len(self.hats) >= 1:
-            #print('Hat count: 1')

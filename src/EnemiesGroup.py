@@ -17,6 +17,7 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
+#Handles enemy groups and their movement
 class EnemiesGroup( sprite.Group):
     def __init__(self, columns, rows):
         game = Main.SpaceInvaders()
@@ -65,34 +66,40 @@ class EnemiesGroup( sprite.Group):
                 self.moveNumber += 1
 
             self.timer += self.moveTime
-
+    
+    #Handles appending of enemy sprites to the group
     def add_internal(self, *sprites):
         super(EnemiesGroup, self).add_internal(*sprites)
         for s in sprites:
             self.enemies[s.row][s.column] = s
 
+    #Handles remval of enemy sprites from the group
     def remove_internal(self, *sprites):
         super(EnemiesGroup, self).remove_internal(*sprites)
         for s in sprites:
             self.kill(s)
         self.update_speed()
 
+    #Checks if a column of the group has been completely removed
     def is_column_dead(self, column):
         return not any(self.enemies[row][column]
                        for row in range(self.rows))
 
+    #Finds random bottom row sprite in which to originate bullet from
     def random_bottom(self):
         col = choice(self._aliveColumns)
         col_enemies = (self.enemies[row - 1][col]
                        for row in range(self.rows, 0, -1))
         return next((en for en in col_enemies if en is not None), None)
 
+    #Causes enemy speed to increase
     def update_speed(self):
         if len(self) == 1:
             self.moveTime = 200
         elif len(self) <= 10:
             self.moveTime = 400
 
+    #Handle defeat of an enemy sprite within the group
     def kill(self, enemy):
         self.enemies[enemy.row][enemy.column] = None
         is_column_dead = self.is_column_dead(enemy.column)

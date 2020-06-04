@@ -53,6 +53,7 @@ BLOCKERS_POSITION = 450
 ENEMY_DEFAULT_POSITION = 65  # Initial value for a new game
 ENEMY_MOVE_DOWN = 35
 
+#The centralised settings for the game. Handles game logic.
 class SpaceInvaders(object):
     def __init__(self):
         # It seems, in Linux buffersize=512 is not enough, use 4096 to prevent:
@@ -85,6 +86,7 @@ class SpaceInvaders(object):
         self.life3 = Life.Life(769, 3)
         self.livesGroup =  sprite.Group(self.life1, self.life2, self.life3)
 
+    #Reset game state for a second playthrough after meeting a win or loss condition
     def reset(self, score):
         self.player = Ship.Ship()
         self.playerGroup =  sprite.Group(self.player)
@@ -106,6 +108,7 @@ class SpaceInvaders(object):
         self.makeNewShip = False
         self.shipAlive = True
 
+    #Handles initialisation of blocker objects
     def make_blockers(self, number):
         blockerGroup =  sprite.Group()
         for row in range(4):
@@ -116,6 +119,7 @@ class SpaceInvaders(object):
                 blockerGroup.add(blocker)
         return blockerGroup
 
+    #Handles loading of audio files
     def create_audio(self):
         self.sounds = {}
         for sound_name in ['shoot', 'shoot2', 'invaderkilled', 'mysterykilled',
@@ -131,6 +135,7 @@ class SpaceInvaders(object):
 
         self.noteIndex = 0
 
+    #Handles playing of background audio track
     def play_main_music(self, currentTime):
         if currentTime - self.noteTimer > self.enemies.moveTime:
             self.note = self.musicNotes[self.noteIndex]
@@ -142,11 +147,13 @@ class SpaceInvaders(object):
             self.note.play()
             self.noteTimer += self.enemies.moveTime
 
+    #Checks if game should exit
     @staticmethod
     def should_exit(evt):
         # type: ( event.EventType) -> bool
         return evt.type ==  QUIT or (evt.type == KEYUP and evt.key == K_ESCAPE)
 
+    #Checks for user key input in order to process user commands
     def check_input(self):
         self.keys =  key.get_pressed()
         for e in  event.get():
@@ -174,6 +181,7 @@ class SpaceInvaders(object):
                             self.allSprites.add(self.bullets)
                             self.sounds['shoot2'].play()
 
+    #Spawns enemies
     def make_enemies(self):
         enemies = EnemiesGroup.EnemiesGroup(10, 5)
         for row in range(5):
@@ -187,6 +195,7 @@ class SpaceInvaders(object):
 
         self.enemies = enemies
 
+    #Processes enemy shots
     def make_enemies_shoot(self):
         if (time.get_ticks() - self.timer) > 700 and self.enemies:
             enemy = self.enemies.random_bottom()
@@ -196,6 +205,7 @@ class SpaceInvaders(object):
             self.allSprites.add(self.enemyBullets)
             self.timer = time.get_ticks()
 
+    #Calculates and returns score gained based on defeated enemy typed
     def calculate_score(self, row):
         scores = {0: 30,
                   1: 20,
@@ -209,6 +219,7 @@ class SpaceInvaders(object):
         self.score += score
         return score
 
+    #Handles rendering of start screen
     def create_main_menu(self):
         self.enemy1 = IMAGES['enemy3_1']
         self.enemy1 =  transform.scale(self.enemy1, (40, 40))
@@ -223,6 +234,7 @@ class SpaceInvaders(object):
         self.screen.blit(self.enemy3, (318, 370))
         self.screen.blit(self.enemy4, (299, 420))
 
+    #Checks bullet collision and enemy hit boxes
     def check_collisions(self):
         sprite.groupcollide(self.bullets, self.enemyBullets, True, True)
 
@@ -271,6 +283,7 @@ class SpaceInvaders(object):
         if self.enemies.bottom >= BLOCKERS_POSITION:
              sprite.groupcollide(self.enemies, self.allBlockers, False, True)
 
+    #Handles spawning of new ship after losing a life.
     def create_new_ship(self, createShip, currentTime):
         if createShip and (currentTime - self.shipTimer > 900):
             self.player = Ship.Ship()
@@ -279,6 +292,7 @@ class SpaceInvaders(object):
             self.makeNewShip = False
             self.shipAlive = True
 
+    #Renders and handles game over screen
     def create_game_over(self, currentTime):
         self.screen.blit(self.background, (0, 0))
         passed = currentTime - self.timer
@@ -297,6 +311,7 @@ class SpaceInvaders(object):
             if self.should_exit(e):
                 sys.exit()
 
+    #Handles game logic
     def main(self):
         while True:
             if self.mainScreen:

@@ -17,6 +17,7 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
+#Handles ship explosion graphic
 class ShipExplosion( sprite.Sprite):
     def __init__(self, ship, *groups):
         super(ShipExplosion, self).__init__(*groups)

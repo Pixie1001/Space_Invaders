@@ -17,6 +17,7 @@ from Ship import *
 from ShipExplosion import *
 from Text import *
 
+#Handles characteristics and behaviour for the special UFO enemy type
 class Mystery( sprite.Sprite):
     def __init__(self):
         sprite.Sprite.__init__(self)
